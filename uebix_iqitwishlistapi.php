@@ -62,6 +62,8 @@ class Uebix_IqitWishlistAPI extends Module
             Shop::setContext(Shop::CONTEXT_ALL);
         }
         
+        // include (dirname(__FILE__) . '/sql/install.php');
+        
         if (parent::install()) {
             foreach ($this->_hooks as $hook) {
                 if (! $this->registerHook($hook)) {
