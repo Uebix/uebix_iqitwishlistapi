@@ -25,7 +25,7 @@ if (! defined('_PS_VERSION_')) {
     exit();
 }
 
-class Uebix_IqitWishlistAPI extends Module
+class Uebix_WishlistAPI extends Module
 {
 
     protected $_hooks = array(
@@ -34,13 +34,16 @@ class Uebix_IqitWishlistAPI extends Module
 
     public function __construct()
     {
-        $this->name = 'uebix_iqitwishlistapi';
+        $this->name = 'uebix_wishlistapi';
         $this->tab = 'export';
-        $this->version = '1.0.0';
+        $this->version = '1.1.0';
         $this->author = 'Uebix.com';
         $this->need_instance = 1;
         $this->dependencies = ['iqitwishlist'];
         
+        /**
+         * Set $this->bootstrap to true if your module is compliant with bootstrap (PrestaShop 1.6)
+         */
         $this->bootstrap = true;
         
         parent::__construct();
@@ -56,13 +59,15 @@ class Uebix_IqitWishlistAPI extends Module
         );
     }
 
+    /**
+     * Don't forget to create update methods if needed:
+     * http://doc.prestashop.com/display/PS16/Enabling+the+Auto-Update
+     */
     public function install()
     {
         if (Shop::isFeatureActive()) {
             Shop::setContext(Shop::CONTEXT_ALL);
         }
-        
-        // include (dirname(__FILE__) . '/sql/install.php');
         
         if (parent::install()) {
             foreach ($this->_hooks as $hook) {
